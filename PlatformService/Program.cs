@@ -1,5 +1,6 @@
 using PlatformService.Data;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,15 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
 var app = builder.Build();
 
+
+var mapperConfig = new MapperConfiguration(cfg =>
+{
+    cfg.AddMaps(AppDomain.CurrentDomain.GetAssemblies());
+},null);
+
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -27,4 +37,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+PrebDb.prepPopulation(app);
 app.Run();
+
+
