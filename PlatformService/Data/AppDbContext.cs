@@ -1,0 +1,16 @@
+﻿using Microsoft.EntityFrameworkCore;
+using PlatformService.Models;
+using System.Diagnostics.Contracts;
+
+namespace PlatformService.Data
+{
+    public class AppDbContext:DbContext
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> opt):base(opt)
+        {
+
+           
+        }
+        public DbSet<Platform>platforms { get; set; }   
+    }
+}
