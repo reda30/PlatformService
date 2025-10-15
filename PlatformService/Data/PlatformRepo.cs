@@ -10,23 +10,26 @@ namespace PlatformService.Data
         {
             _context = context;    
         }
-        public void CreatePlatform(Platform platform)
+        public void CreatePlatform(Platform plat)
         {
+            if (plat == null)
+            {
+                throw new ArgumentNullException(nameof(plat));
+            }
 
-            if (platform is not null) _context.Add(platform);
-
-            throw new ArgumentNullException(nameof(platform));
+            _context.Platforms.Add(plat);
         }
+
 
         public IEnumerable<Platform> GetAllPlatforms()
         {
-            var platforms= _context.platforms.ToList();
+            var platforms= _context.Platforms.ToList();
             return platforms;
         }
 
         public Platform GetPlatformById(int id)
         {
-            var platform = _context.platforms.FirstOrDefault(x=>x.Id==id);
+            var platform = _context.Platforms.FirstOrDefault(x=>x.Id==id);
 
             return platform!;
           
