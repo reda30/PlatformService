@@ -1,4 +1,4 @@
-d using PlatformService.Data;
+using PlatformService.Data;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
